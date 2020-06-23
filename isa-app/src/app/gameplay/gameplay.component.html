@@ -1,0 +1,51 @@
+<mat-toolbar color="primary" role="heading" class="mat-toolbar">
+  <img  src="../../assets/logo.png" alt="Logo" width="60px" height="60px">
+  <div fxFlex fxLayoutAlign="end" fxLayoutGap="10px" fxHide.xs>
+    <a mat-list-item routerLink="/welcome" style="color: white; text-decoration: none;">Home</a>
+    <a mat-list-item routerLink="/campaigns"  style="color: white; text-decoration: none;">Campaigns</a>
+    <a mat-list-item routerLink="/gameplay"  style="color: white; text-decoration: none;">Characters</a>
+    <a mat-list-item routerLink=""  style="color: white; text-decoration: none;">Sign out</a>
+  </div>
+</mat-toolbar>
+
+<div fxLayoutAlign="center center">
+  <mat-form-field fxFlex="25%">
+    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<mat-table [dataSource]="characterDataSource" matSort>
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Character_id</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.character_id}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Character name</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="username">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.username }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+    <mat-cell fxLayout="row" fxLayoutGap="10px" *matCellDef="let element">
+      <button mat-raised-button color="accent" (click)="goToDetails(element.character_id)">Details</button>
+      <button mat-raised-button color="accent" (click)="goToEdit(element.character_id)">Edit</button>
+      <button mat-raised-button color="accent" (click)="deleteProduct(element.character_id)">Delete</button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let rows; columns: displayedColumns;"></mat-row>
+  <mat-header-row ></mat-header-row>
+  <mat-row ></mat-row>
+</mat-table>
+
+<mat-paginator [pageSize]="10" [pageSizeOptions]="[5,10,20,50,100]"></mat-paginator>
+<div class="button-add">
+  <button mat-raised-button color="accent" (click)="goToAddCharacter()">Add new character</button>
+</div>
