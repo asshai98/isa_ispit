@@ -1,3 +1,6 @@
+# isa_db
+Posto su u projektu dve baze, iskoristiti ovaj sql dumpo-van fajl kao bazu!
+
 # isa_projekat
 Internet i Softverske arhitekture ispit
 
